@@ -34,43 +34,40 @@ def main():
         answer = random.choice(words_list) 
         hint = ['_'] * len(answer) 
         wrong_guesses = 0 
-        guessed_letters = set()
+        guessed_letters = set() 
         is_running = True 
 
         while is_running:
             display_man(wrong_guesses) 
-            display_hint(hint) #called the function to display hint
-            guess = input('\nEnter a letter:').lower()
-             
+            display_hint(hint) 
+            guess = input('\nEnter a letter:').lower() 
         
-            if len(guess) != 1:  # if guesss is more than 1 letter
-                print('Invalid Input') 
+            if len(guess) != 1:  #checks if the guess is more than one character
+                print('invalid input') 
                 continue 
-            if len(guess) != guess.isalpha(): #if the guess is not alpha character
-                print('Invalid Input')
-                continue
-        
-            if guess in answer: #If the guessed letter is in the answer
-                for i in range(len(answer)):
                 
+            if guess in answer: 
+                for i in range(len(answer)):
                     if answer[i] == guess: 
                         hint[i] = guess 
-                else:
-                    wrong_guesses += 1 
+            else:
+                wrong_guesses += 1 
 
-                if '_' not in hint: #If there are no more underscores in the hint (all letters are guessed)
-                    display_answer(answer.upper()) 
-                    print('*****- CONGRATULATIONS YOU WON! -*****')
-                    play_again = input("Play again? (y/n): ").lower()
-                    if play_again == 'y':
-                        break
-                elif wrong_guesses >= len(chances_to_guesses) - 1: #if the no.of wrong guesses exceeds the maximum limit 
-                    display_man(wrong_guesses) 
-                    print(f'The answer is {answer.upper()}') 
-                    print('*****- YOU LOSE THE GAME -*****')
-                    play_again = input("Play again? (y/n): ").lower()
-                    if play_again != 'y':
-                        break
+            if '_' not in hint: 
+                display_answer(answer.upper()) 
+                print('*****- CONGRATULATIONS YOU WON! -*****')
+                is_running = False
+                break
+
+            elif wrong_guesses >= len(chances_to_guesses) - 1:  
+                display_man(wrong_guesses) 
+                print(f'The answer is {answer.upper()}') 
+                print('*****- YOU LOSE THE GAME -*****')
+                is_running = False
+                break
+        play_again = input("Play again? (y/n): ").lower()
+        if play_again == 'n':
+            break
+
                 
 main()
-

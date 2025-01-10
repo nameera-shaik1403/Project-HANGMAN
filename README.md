@@ -62,15 +62,18 @@ if guess in answer:
             if '_' not in hint: #If there are no more underscores in the hint (all letters are guessed)
                 display_answer(answer.upper()) #displays the correctc answer
                 print('*****- CONGRATULATIONS YOU WON! -*****')
-                play_again = input("Play again? (y/n): ").lower()
-                if play_again == 'y':
-                    break
+                is_running = False
+                break
             elif wrong_guesses >= len(chances_to_guesses) - 1: #if the no.of wrong guesses exceeds the maximum limit 
                 display_man(wrong_guesses) #displays the final hangman figure
                 print(f'The answer is {answer.upper()}') #prints the  correct answer in upper case
                 print('*****- YOU LOSE THE GAME -*****')
-                play_again = input("Play again? (y/n): ").lower()
-                if play_again != 'y':
-                    return
+                is_running = False
+                break
+# to play again or not
+play_again = input("Play again? (y/n): ").lower()
+    if play_again == 'n':
+        break
+
                 
 main()
